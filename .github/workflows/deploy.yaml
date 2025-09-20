@@ -12,8 +12,8 @@ jobs:
     env:
       HELM_RELEASE: argo
       NAMESPACE: argocd
-      CHART: argo-helm
-      REPO: https://argoproj.github.io/
+      CHART: argo-cd
+      REPO: https://argoproj.github.io/argo-helm
     runs-on: ubuntu-latest
 
     steps:
@@ -44,4 +44,3 @@ jobs:
             -f values.yaml
 
         
-  
