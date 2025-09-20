@@ -1,0 +1,47 @@
+name: Deploy argocd
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+
+  deploy:
+    env:
+      HELM_RELEASE: argo
+      NAMESPACE: argocd
+      CHART: argo-helm
+      REPO: https://argoproj.github.io/
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v4
+        with:
+          version: 'latest'
+
+      - name: Set up helm
+        uses: azure/setup-helm@v4
+        with:
+          version: 'latest'
+
+      - name: Configure kubeconfig
+        run: |
+          mkdir -p $HOME/.kube
+          echo "${{ secrets.KUBECONFIG_B64 }}" | base64 --decode > $HOME/.kube/config
+          chmod 600 $HOME/.kube/config
+
+      - name: Deploy Helm chart to EKS
+        run: |
+          helm upgrade --install ${{ env.HELM_RELEASE }} ${{ env.CHART }} \
+            --repo ${{ env.REPO }} \
+            --namespace ${{ env.NAMESPACE }} --create-namespace \
+            -f values.yaml
+
+        
+  
