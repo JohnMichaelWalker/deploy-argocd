@@ -1,38 +1,32 @@
 controller:
   resources:
-    requests:
-      cpu: 200m
-      memory: 512Mi
-    limits:
-      cpu: 300m
-      memory: 1024Mi
+    requests: {cpu: 200m, memory: 512Mi}
+    limits: {cpu: 300m, memory: 1024Mi}
 
 repoServer:
   resources:
-    requests:
-      cpu: 100m
-      memory: 512Mi
-    limits:
-      cpu: 200m
-      memory: 1024Mi
+    requests: {cpu: 100m, memory: 512Mi}
+    limits: {cpu: 200m, memory: 1024Mi}
 
 server:
   resources:
-    requests:
-      cpu: 100m
-      memory: 256Mi
-    limits:
-      cpu: 200m
-      memory: 512Mi
+    requests: {cpu: 100m, memory: 256Mi}
+    limits: {cpu: 200m, memory: 512Mi}
 
 redis:
   resources:
-    requests:
-      cpu: 50m
-      memory: 64Mi
-    limits:
-      cpu: 100m
-      memory: 128Mi
+    requests: {cpu: 50m, memory: 64Mi}
+    limits: {cpu: 100m, memory: 128Mi}
+
+applicationSet:
+  resources:
+    requests: {cpu: 50m, memory: 128Mi}
+    limits: {cpu: 200m, memory: 256Mi}
+
+notifications:
+  resources:
+    requests: {cpu: 25m, memory: 64Mi}
+    limits: {cpu: 100m, memory: 128Mi}
 
 dex:
   enabled: false
